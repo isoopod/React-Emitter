@@ -1,0 +1,17 @@
+{
+  "name": "React-Emitter",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "Packages": {
+        "$className": "Folder",
+        "ReactEmitter": {
+          "$path": "src"
+        },
+        "roblox_packages": {
+          "$path": "roblox_packages"
+        }
+      }
+    }
+  }
+}
