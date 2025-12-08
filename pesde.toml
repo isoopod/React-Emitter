@@ -21,6 +21,7 @@ sourcemap_generator = ".pesde/scripts/sourcemap_generator.luau"
 [dev_dependencies]
 scripts = { name = "pesde/scripts_rojo", version = "^0.2.0", target = "lune" }
 rojo = { name = "pesde/rojo", version = "^7.5.1", target = "lune" }
+UI_Labs = { name = "pepeeltoro41/ui_labs", version = "^2.4.2" }
 
 [engines]
 pesde = "^0.7.0"
@@ -28,3 +29,6 @@ lune = "^0.10.2"
 
 [dependencies]
 React = { wally = "jsdotlua/react", version = "^17.2.1" }
+
+[patches]
+"wally#jsdotlua/react" = { "17.2.1 roblox" = "patches/wally#jsdotlua+react-17.2.1+roblox.patch" }

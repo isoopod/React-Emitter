@@ -12,8 +12,9 @@ export type Particle = {
 	-- Derived from emitter properties
 	Direction: Vector2,
 	FlipbookFrame: number, -- Only present if flipbook enabled
-	FlipbookFrameTarget: number, -- Only in Random mode
 	FlipbookFrameAlpha: number, -- 0..1 Only in Random Mode
+	FlipbookFramerate: number,
+	FlipbookFrameTarget: number, -- Only in Random mode
 	Speed: number,
 	Lifetime: number,
 	Position: Vector2,
@@ -205,8 +206,9 @@ function Particle.new(emitter: Emitter.Emitter): Particle
 
 		Direction = direction,
 		FlipbookFrame = frame :: number,
-		FlipbookFrameTarget = emitter.FlipbookMode == Enum.ParticleFlipbookMode.Random and frame or nil :: any,
 		FlipbookFrameAlpha = emitter.FlipbookMode == Enum.ParticleFlipbookMode.Random and 0 or nil :: any,
+		FlipbookFramerate = RANDOM:NextInteger(emitter.FlipbookFramerate.Min, emitter.FlipbookFramerate.Max),
+		FlipbookFrameTarget = emitter.FlipbookMode == Enum.ParticleFlipbookMode.Random and frame or nil :: any,
 		Speed = RANDOM:NextNumber(emitter.Speed.Min, emitter.Speed.Max),
 		Lifetime = RANDOM:NextNumber(emitter.Lifetime.Min, emitter.Lifetime.Max),
 		Position = position,
@@ -265,7 +267,7 @@ function Particle.Update(particle: Particle, dt: number): boolean
 		local mode = emitter.FlipbookMode
 
 		if mode == Enum.ParticleFlipbookMode.Loop then
-			frame = (t * emitter.FlipbookFramerate) % frames
+			frame = (t * particle.FlipbookFramerate) % frames
 		elseif mode == Enum.ParticleFlipbookMode.OneShot then
 			local a = t / particle.Lifetime
 
@@ -285,7 +287,7 @@ function Particle.Update(particle: Particle, dt: number): boolean
 				frame = (frames - 1) * (1 - k)
 			end
 		else
-			local a = particle.FlipbookFrameAlpha + emitter.FlipbookFramerate * dt
+			local a = particle.FlipbookFrameAlpha + particle.FlipbookFramerate * dt
 
 			if a >= 1 then
 				a = 0
