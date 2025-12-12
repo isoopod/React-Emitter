@@ -2,32 +2,9 @@
 --!native
 
 -- Modules
-local Emitter = require(script.Parent.Emitter)
+local EmitterType = require(script.Parent.EmitterType)
 
 local RANDOM = Random.new()
-
-export type Particle = {
-	Emitter: Emitter.Emitter,
-
-	-- Derived from emitter properties
-	Direction: Vector2,
-	FlipbookFrame: number, -- Only present if flipbook enabled
-	FlipbookFrameAlpha: number, -- 0..1 Only in Random Mode
-	FlipbookFramerate: number,
-	FlipbookFrameTarget: number, -- Only in Random mode
-	Speed: number,
-	Lifetime: number,
-	Position: Vector2,
-	Rotation: number,
-	RotSpeed: number,
-
-	Color: Color3,
-	Size: number,
-	Squash: number,
-	Transparency: number,
-
-	Time: number,
-}
 
 local normalToDir = {
 	Vector2.yAxis,
@@ -121,8 +98,14 @@ end
 
 local Particle = {}
 
+local _seed = 0
+local function nextSeed(): number
+	_seed += 1
+	return _seed
+end
+
 -- Emit a particle
-function Particle.new(emitter: Emitter.Emitter): Particle
+function Particle.new(emitter: EmitterType._Emitter): EmitterType.Particle
 	-- If emitter is updated, a new reference is made and existing particles use the old emitter
 	-- Determine Position and Direction from Shape settings
 	local direction, position
@@ -220,16 +203,17 @@ function Particle.new(emitter: Emitter.Emitter): Particle
 		Squash = getValueAtTime(emitter.Squash, 0),
 		Transparency = getValueAtTime(emitter.Transparency, 0),
 
-		Time = 0,
+		Age = 0,
+		_id = nextSeed(),
 	}
 end
 
-function Particle.Update(particle: Particle, dt: number): boolean
+function Particle.Update(particle: EmitterType.Particle, dt: number): boolean
 	local emitter = particle.Emitter
 
-	local t = particle.Time + dt * emitter.TimeScale
+	local t = particle.Age + dt * emitter.TimeScale
 	if t >= particle.Lifetime then return false end
-	particle.Time = t
+	particle.Age = t
 
 	-- Integrate acceleration
 	local vx = particle.Direction.X * particle.Speed + emitter.Acceleration.X * dt

@@ -11,6 +11,9 @@
         "roblox_packages": {
           "$path": "roblox_packages"
         }
+      },
+      "Stories": {
+        "$path": "stories"
       }
     }
   }
