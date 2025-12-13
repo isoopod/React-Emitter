@@ -7,9 +7,9 @@ local EmitterType = require(script.Parent.EmitterType)
 local RANDOM = Random.new()
 
 local normalToDir = {
-	Vector2.yAxis,
-	Vector2.xAxis,
 	-Vector2.yAxis,
+	Vector2.xAxis,
+	Vector2.yAxis,
 	-Vector2.xAxis,
 }
 
@@ -184,6 +184,11 @@ function Particle.new(emitter: EmitterType._Emitter): EmitterType.Particle
 	local frame
 	if emitter.FlipbookLayout ~= Enum.ParticleFlipbookLayout.None then frame = emitter.FlipbookStartRandom and RANDOM:NextInteger(0, emitter._frames) or 0 end
 
+	-- Size normalisation factor (Longest side)
+	local sizeScale = math.max(dimensions.X, dimensions.Y) * 0.1
+
+	local speed = RANDOM:NextNumber(emitter.Speed.Min, emitter.Speed.Max) * sizeScale
+
 	return {
 		Emitter = emitter,
 
@@ -192,7 +197,7 @@ function Particle.new(emitter: EmitterType._Emitter): EmitterType.Particle
 		FlipbookFrameAlpha = emitter.FlipbookMode == Enum.ParticleFlipbookMode.Random and 0 or nil :: any,
 		FlipbookFramerate = RANDOM:NextInteger(emitter.FlipbookFramerate.Min, emitter.FlipbookFramerate.Max),
 		FlipbookFrameTarget = emitter.FlipbookMode == Enum.ParticleFlipbookMode.Random and frame or nil :: any,
-		Speed = RANDOM:NextNumber(emitter.Speed.Min, emitter.Speed.Max),
+		Speed = speed,
 		Lifetime = RANDOM:NextNumber(emitter.Lifetime.Min, emitter.Lifetime.Max),
 		Position = position,
 		Rotation = RANDOM:NextNumber(emitter.Rotation.Min, emitter.Rotation.Max) % 360,

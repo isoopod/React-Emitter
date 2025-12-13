@@ -29,6 +29,7 @@ local set: (Instance, string, any) -> () = yoink(function()
 end)
 
 local create = Instance.new
+local destroy = game.Destroy
 
 export type props = {
 	Emitter: EmitterType.Emitter,
@@ -47,12 +48,15 @@ local registry = {} :: {
 	},
 }
 
-RunService.PreRender:Connect(function()
+local function step()
 	for frame, renderer in registry do
 		local props = renderer.props
 		local instances = renderer.instances
 		local emitter = props.Emitter
-		local particles = Emitter.Particles[emitter :: EmitterType._Emitter]
+		local particles = Emitter.Particles[emitter :: EmitterType._Emitter] or {} :: any
+
+		local dimensions = emitter.ShapeDimensions
+		local XBigger = dimensions.X > dimensions.Y
 
 		local seen = {}
 
@@ -60,11 +64,8 @@ RunService.PreRender:Connect(function()
 			local id = particle._id
 			seen[id] = true
 			local existing, new = instances[id], false
-			if not existing then
-				existing = {}
-				instances[id] = existing
-				new = true
 
+			if not existing then
 				-- Create new instance(s)
 				local img1 = create("ImageLabel")
 				set(img1, "BackgroundTransparency", 1)
@@ -73,6 +74,10 @@ RunService.PreRender:Connect(function()
 					img2 = create("ImageLabel")
 					set(img2, "BackgroundTransparency", 1)
 				end
+
+				existing = { img1, img2 }
+				instances[id] = existing
+				new = true
 			end
 
 			-- Update instance(s)
@@ -81,9 +86,10 @@ RunService.PreRender:Connect(function()
 				set(v, "Position", UDim2.fromOffset(position.X, position.Y))
 				local size = particle.Size
 				set(v, "Size", UDim2.fromScale(size, size * (1 - particle.Squash)))
+				set(v, "SizeConstraint", XBigger and Enum.SizeConstraint.RelativeXX or Enum.SizeConstraint.RelativeYY)
 				set(v, "Rotation", particle.Rotation)
 				set(v, "ImageColor3", particle.Color)
-				set(v, "Transparency", math.clamp(particle.Transparency + (props.LocalTransparencyModifier or 0), 0, 1))
+				set(v, "ImageTransparency", math.clamp(particle.Transparency + (props.LocalTransparencyModifier or 0), 0, 1))
 				set(v, "ImageContent", emitter.Texture)
 				set(v, "ZIndex", props.ZOffset or 1)
 				--TODO Flipbook support
@@ -95,6 +101,31 @@ RunService.PreRender:Connect(function()
 				end
 			end
 		end
+
+		for id, existing in instances do
+			if not seen[id] then
+				for _, v in existing do
+					destroy(v)
+				end
+				instances[id] = nil
+			end
+		end
+	end
+end
+
+local isEdit = not RunService:IsRunning()
+
+-- When using tools like UI_Labs, we want to avoid multiple bindings.
+RunService:UnbindFromRenderStep("ReactEmitterRenderer")
+RunService:BindToRenderStep("ReactEmitterRenderer", Enum.RenderPriority.Last.Value, function()
+	if isEdit then
+		local success, err = pcall(step :: any)
+		if not success then
+			RunService:UnbindFromRenderStep("ReactEmitterRenderer")
+			error(err)
+		end
+	else
+		step()
 	end
 end)
 
@@ -108,15 +139,21 @@ return function(props: props)
 		return function()
 			for _, v in registry[container.current].instances do
 				for _, instance in v do
-					instance:Destroy()
+					destroy(instance)
 				end
 			end
 			registry[container.current] = nil
 		end
 	end, { props.Emitter, container.current } :: { unknown })
 
-	local native: any = props.native or {}
+	local native = {}
 	native.ref = container
+	local size = props.Emitter.ShapeDimensions
+	native.Size = UDim2.fromOffset(size.X, size.Y)
+	native.BackgroundTransparency = 1
+	for k, v in (props.native or {} :: any) do
+		native[k] = v
+	end
 
 	return e("Frame", native, props.children)
 end
