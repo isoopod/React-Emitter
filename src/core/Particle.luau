@@ -216,24 +216,25 @@ end
 function Particle.Update(particle: EmitterType.Particle, dt: number): boolean
 	local emitter = particle.Emitter
 
-	local t = particle.Age + dt * emitter.TimeScale
+	local dtAdjusted = dt * emitter.TimeScale
+	local t = particle.Age + dtAdjusted
 	if t >= particle.Lifetime then return false end
 	particle.Age = t
 
 	-- Integrate acceleration
-	local vx = particle.Direction.X * particle.Speed + emitter.Acceleration.X * dt
-	local vy = particle.Direction.Y * particle.Speed + emitter.Acceleration.Y * dt
+	local vx = particle.Direction.X * particle.Speed + emitter.Acceleration.X * dtAdjusted
+	local vy = particle.Direction.Y * particle.Speed + emitter.Acceleration.Y * dtAdjusted
 
 	-- Apply exponential drag (Drag = time in seconds to halve velocity)
 	local drag = emitter.Drag
-	if drag > 0 then
-		local decay = 0.5 ^ (dt / drag)
+	if math.abs(drag) > 0 then
+		local decay = 0.5 ^ (dtAdjusted / drag)
 		vx *= decay
 		vy *= decay
 	end
 
 	-- Integrate position (semi-implicit Euler)
-	particle.Position += Vector2.new(vx * dt, vy * dt)
+	particle.Position += Vector2.new(vx * dtAdjusted, vy * dtAdjusted)
 
 	-- Recompute speed and direction
 	local newSpeed = math.sqrt(vx * vx + vy * vy)
@@ -247,7 +248,7 @@ function Particle.Update(particle: EmitterType.Particle, dt: number): boolean
 
 	-- Integrate rotation
 	local rotspeed = particle.RotSpeed
-	if rotspeed ~= 0 then particle.Rotation = (particle.Rotation + particle.RotSpeed * dt) % 360 end
+	if rotspeed ~= 0 then particle.Rotation = (particle.Rotation + particle.RotSpeed * dtAdjusted) % 360 end
 
 	-- Flipbook
 	local frame = particle.FlipbookFrame
@@ -276,7 +277,7 @@ function Particle.Update(particle: EmitterType.Particle, dt: number): boolean
 				frame = (frames - 1) * (1 - k)
 			end
 		else
-			local a = particle.FlipbookFrameAlpha + particle.FlipbookFramerate * dt
+			local a = particle.FlipbookFrameAlpha + particle.FlipbookFramerate * dtAdjusted
 
 			if a >= 1 then
 				a = 0

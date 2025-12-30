@@ -5,6 +5,7 @@ local Runtime = require("../Runtime")
 
 local actor = script:GetActor()
 
+actor:BindToMessage("init", Runtime.init)
 actor:BindToMessage("register", Runtime.register)
 actor:BindToMessage("unregister", Runtime.unregister)
 actor:BindToMessage("setProperty", Runtime.setProperty)

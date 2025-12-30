@@ -1,5 +1,9 @@
 local Emitter = require("@self/core/Emitter")
 
+--[=[
+	@class ReactEmitter
+]=]
+
 return {
 	useEmitter = require("@self/hooks/useEmitter"),
 	useEmitters = require("@self/hooks/useEmitters"),

@@ -14,6 +14,11 @@ local complete = evt.Fire
 local emitters: { [number]: EmitterType._Emitter } = {}
 local particles: { [number]: { EmitterType.Particle } } = {}
 
+local actorIndex: number
+function runtime.init(index: number)
+	actorIndex = index
+end
+
 function runtime.register(emitter: EmitterType._Emitter)
 	emitters[emitter._seed] = emitter
 	particles[emitter._seed] = {}
@@ -43,7 +48,7 @@ function runtime.emit(seed: number)
 	end
 end
 
-function runtime.dispatch(dt: number)
+function runtime.dispatch(dt: number, frame: number)
 	for seed in emitters do
 		local emitterParticles = particles[seed]
 
@@ -63,29 +68,31 @@ function runtime.dispatch(dt: number)
 		end
 	end
 
-	local function deepclone<T>(t: T): T
-		if type(t) ~= "table" then return t end
-		local out = {}
-		for k, v in t do
-			out[k] = deepclone(v)
+	-- Copy out all required information
+	local out = {}
+	for seed, emitterParticles in particles do
+		local outSeed = {}
+		out[seed] = outSeed
+		for i, p in emitterParticles do
+			outSeed[i] = {
+				Direction = p.Direction,
+				FlipbookFrame = p.FlipbookFrame,
+				FlipbookFrameAlpha = p.FlipbookFrameAlpha,
+				FlipbookFrameTarget = p.FlipbookFrameTarget,
+				Lifetime = p.Lifetime,
+				Position = p.Position,
+				Rotation = p.Rotation,
+				Color = p.Color,
+				Size = p.Size,
+				Squash = p.Squash,
+				Transparency = p.Transparency,
+				_id = actorIndex * 536870912 + p._id, -- Shift left 29 bits
+				-- TECHNICAL LIMITATION: This gives us ~31 days of runtime per emitter at a rate of 200. Should be enough
+			}
 		end
-		return out :: any
 	end
 
-	local out = deepclone(particles)
-
-	for _, emitter in out do
-		for _, particle in emitter do
-			particle.Emitter = nil :: any
-			particle.Direction = nil :: any
-			particle.FlipbookFramerate = nil :: any
-			particle.RotSpeed = nil :: any
-			particle.Speed = nil :: any
-			particle.Age = nil :: any
-		end
-	end
-
-	complete(evt, out)
+	complete(evt, out, frame)
 end
 
 return runtime

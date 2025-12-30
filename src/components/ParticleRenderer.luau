@@ -32,8 +32,9 @@ local create = Instance.new
 local destroy = game.Destroy
 
 export type props = {
-	Emitter: EmitterType.Emitter,
+	Emitter: EmitterType._Emitter,
 	LocalTransparencyModifier: number?, -- Additive modifier for particle transparency from this renderer
+	ResampleMode: Enum.ResamplerMode?, -- Resample mode used for the particles
 	ZOffset: number?, -- ZOffset of particles
 	native: { [any]: any }?,
 	children: React.ReactNode?,
@@ -53,7 +54,7 @@ local function step()
 		local props = renderer.props
 		local instances = renderer.instances
 		local emitter = props.Emitter
-		local particles = Emitter.Particles[emitter :: EmitterType._Emitter] or {} :: any
+		local particles: { EmitterType.Particle } = Emitter.Particles[emitter._seed] or {}
 
 		local dimensions = emitter.ShapeDimensions
 		local XBigger = dimensions.X > dimensions.Y
@@ -69,10 +70,12 @@ local function step()
 				-- Create new instance(s)
 				local img1 = create("ImageLabel")
 				set(img1, "BackgroundTransparency", 1)
+				set(img1, "AnchorPoint", Vector2.new(0.5, 0.5))
 				local img2
 				if particle.FlipbookFrameTarget then
 					img2 = create("ImageLabel")
 					set(img2, "BackgroundTransparency", 1)
+					set(img2, "AnchorPoint", Vector2.new(0.5, 0.5))
 				end
 
 				existing = { img1, img2 }
@@ -81,18 +84,53 @@ local function step()
 			end
 
 			-- Update instance(s)
+			local ranOnce = false
 			for _, v in existing do
 				local position = particle.Position
 				set(v, "Position", UDim2.fromOffset(position.X, position.Y))
 				local size = particle.Size
-				set(v, "Size", UDim2.fromScale(size, size * (1 - particle.Squash)))
+				local squash = particle.Squash
+
+				-- X shrinks when squash > 0, grows when squash < 0.
+				-- Y grows when squash > 0, shrinks when squash < 0.
+				local scaleX = size * (1 - squash)
+				local scaleY = size * (1 + squash)
+
+				set(v, "Size", UDim2.fromScale(scaleX, scaleY))
 				set(v, "SizeConstraint", XBigger and Enum.SizeConstraint.RelativeXX or Enum.SizeConstraint.RelativeYY)
 				set(v, "Rotation", particle.Rotation)
 				set(v, "ImageColor3", particle.Color)
 				set(v, "ImageTransparency", math.clamp(particle.Transparency + (props.LocalTransparencyModifier or 0), 0, 1))
 				set(v, "ImageContent", emitter.Texture)
 				set(v, "ZIndex", props.ZOffset or 1)
-				--TODO Flipbook support
+				set(v, "ResampleMode", props.ResampleMode or Enum.ResamplerMode.Default)
+
+				-- Flipbook Particles
+				local fb = particle.FlipbookFrame
+				local cache = emitter._frameCache
+				if fb and cache then
+					-- emitter may have been changed during the lifetime of this particle so we are setting defaults to prevent errors
+
+					set(v, "ImageRectOffset", cache[fb] or Vector2.zero)
+					set(v, "ImageRectSize", emitter._frameSize or Vector2.zero)
+
+					if ranOnce then
+						local ft = particle.FlipbookFrameTarget
+						local fa = particle.FlipbookFrameAlpha
+
+						local img1, img2 = instances[id][1], instances[id][2]
+
+						set(img2, "ImageRectOffset", cache[ft] or Vector2.zero)
+
+						-- Crossfade
+						set(img1, "ImageTransparency", math.clamp(particle.Transparency + fa + (props.LocalTransparencyModifier or 0), 0, 1))
+						set(img2, "ImageTransparency", math.clamp(particle.Transparency + fa + (props.LocalTransparencyModifier or 0), 0, 1))
+					end
+				else
+					set(v, "ImageRectOffset", Vector2.zero)
+					set(v, "ImageRectSize", Vector2.zero)
+				end
+				ranOnce = true
 			end
 
 			if new then
@@ -129,6 +167,12 @@ RunService:BindToRenderStep("ReactEmitterRenderer", Enum.RenderPriority.Last.Val
 	end
 end)
 
+--[=[
+	@function ParticleRenderer
+	@within ReactEmitter
+	@param props { Emitter: Emitter, LocalTransparencyModifier: number?, ResampleMode: ResamplerMode?, ZOffset: number?, native: { [any]: any }? }
+	@return ReactElement
+]=]
 return function(props: props)
 	local container = React.useRef(nil :: Frame?)
 
