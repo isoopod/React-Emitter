@@ -1,0 +1,6 @@
+gitSourceBranch = "main"
+classOrder = ["ReactEmitter", "Emitter"]
+
+[home]
+enabled = true
+includeReadme = true

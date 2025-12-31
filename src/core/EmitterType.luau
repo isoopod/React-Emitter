@@ -85,7 +85,7 @@ export type _Emitter = Emitter & {
 	.Squash NumberSequence -- [0] Allows for non-uniform scaling of particles over their lifetimes. >0 elongates it vertically, and <0 elongates it horizontally.
 	.Texture Content -- [sparkles] The texture of each particle, given as a Content (e.g. `Content.fromAssetId(xxxx)` or `Content.fromUri("rbxassetid://xxxx")`).
 	.TimeScale number -- [1] Multiplier to how fast particles are simulated. Allows for values outside the range [0, 1]. Applies to rate as well.
-	.Transparency NumberRange [0] Determines the transparency of individual particles over their lifetimes. Use `NumberSequence.new(n)` for a single transparency. 
+	.Transparency NumberRange -- [0] Determines the transparency of individual particles over their lifetimes. Use `NumberSequence.new(n)` for a single transparency. 
 	These are the props used by useEmitter / useEmitters to create an Emitter. Every field is optional and has a default if not given.
 ]=]
 export type EmitterPublic = {

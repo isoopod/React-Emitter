@@ -3,7 +3,7 @@ local React = require("../../roblox_packages/React")
 local useEmitters = require("./useEmitters")
 
 --[=[
-	@function useEmitters
+	@function useEmitter
 	@within ReactEmitter
 	@param props EmitterProps | () -> EmitterProps -- Using a function will enable the Imperative API
 	@return Emitter
