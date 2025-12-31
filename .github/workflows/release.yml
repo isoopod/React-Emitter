@@ -28,9 +28,13 @@ jobs:
           tag=${{ github.ref_name }}
           echo "version=${tag#"v"}" >> "$GITHUB_OUTPUT"
 
+      - name: Debug list files
+        run: ls -la
+
       - name: Update changelog
         uses: thomaseizinger/keep-a-changelog-new-release@v3
         with:
+          changelogPath: CHANGELOG.md
           tag: ${{ github.ref_name }}
 
       - name: Bump pesde version
