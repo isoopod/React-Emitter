@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[953],{9202:e=>{e.exports=JSON.parse('{"functions":[],"properties":[],"types":[],"name":"Emitter","desc":"An Emitter created through useEmitter or useEmitters. Can be used in multiple ParticleRenderers.","source":{"line":5,"path":"src/core/EmitterType.luau"}}')}}]);

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-emitters" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Emitter Props | React-Emitter</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://isoopod.github.io/React-Emitter/docs/emitters"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Emitter Props | React-Emitter"><meta data-rh="true" name="description" content="EmitterProps defines the configuration schema for 2D UI particle emitters created via ReactEmitter.useEmitter or ReactEmitter.useEmitters."><meta data-rh="true" property="og:description" content="EmitterProps defines the configuration schema for 2D UI particle emitters created via ReactEmitter.useEmitter or ReactEmitter.useEmitters."><link data-rh="true" rel="canonical" href="https://isoopod.github.io/React-Emitter/docs/emitters"><link data-rh="true" rel="alternate" href="https://isoopod.github.io/React-Emitter/docs/emitters" hreflang="en"><link data-rh="true" rel="alternate" href="https://isoopod.github.io/React-Emitter/docs/emitters" hreflang="x-default"><link rel="stylesheet" href="/React-Emitter/assets/css/styles.5cbed574.css">
+<script src="/React-Emitter/assets/js/runtime~main.55160a0f.js" defer="defer"></script>
+<script src="/React-Emitter/assets/js/main.c2ef15de.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/React-Emitter/"><b class="navbar__title text--truncate">React-Emitter</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/React-Emitter/docs/intro">Docs</a><a class="navbar__item navbar__link" href="/React-Emitter/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/isoopod/React-Emitter" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/React-Emitter/docs/intro">Intro</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/React-Emitter/docs/emitters">Emitter Props</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/React-Emitter/docs/renderer">Particle Renderer</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/React-Emitter/docs/imperative">Imperatives</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/React-Emitter/docs/bulk">useEmitters</a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/React-Emitter/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Emitter Props</span><meta itemprop="position" content="1"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Emitter Props</h1></header>
+<p><code>EmitterProps</code> defines the configuration schema for 2D UI particle emitters created via <code>ReactEmitter.useEmitter</code> or <code>ReactEmitter.useEmitters</code>.</p>
+<p>All fields are <strong>optional</strong>. Defaults are applied internally when omitted.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="usage">Usage<a href="#usage" class="hash-link" aria-label="Direct link to Usage" title="Direct link to Usage">​</a></h2>
+<p><code>useEmitter</code> can take either of the follow as props:</p>
+<ul>
+<li>A <strong>table</strong> of <code>EmitterProps</code> (declarative), or</li>
+<li>A <strong>function</strong> that returns <code>EmitterProps</code> (imperative).</li>
+</ul>
+<div class="language-lua codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#bfc7d5;--prism-background-color:#292d3e"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-lua codeBlock_bY9V thin-scrollbar" style="color:#bfc7d5;background-color:#292d3e"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#bfc7d5"><span class="token comment" style="color:rgb(105, 112, 152);font-style:italic">-- Create an emitter with custom size and dimensions (in pixels)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"></span><span class="token keyword" style="font-style:italic">local</span><span class="token plain"> emitter </span><span class="token operator" style="color:rgb(137, 221, 255)">=</span><span class="token plain"> ReactEmitter</span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token function" style="color:rgb(130, 170, 255)">useEmitter</span><span class="token punctuation" style="color:rgb(199, 146, 234)">(</span><span class="token punctuation" style="color:rgb(199, 146, 234)">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">    Size </span><span class="token operator" style="color:rgb(137, 221, 255)">=</span><span class="token plain"> NumberSequence</span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token function" style="color:rgb(130, 170, 255)">new</span><span class="token punctuation" style="color:rgb(199, 146, 234)">(</span><span class="token number" style="color:rgb(247, 140, 108)">0.2</span><span class="token punctuation" style="color:rgb(199, 146, 234)">)</span><span class="token punctuation" style="color:rgb(199, 146, 234)">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain">    ShapeDimensions </span><span class="token operator" style="color:rgb(137, 221, 255)">=</span><span class="token plain"> Vector2</span><span class="token punctuation" style="color:rgb(199, 146, 234)">.</span><span class="token function" style="color:rgb(130, 170, 255)">new</span><span class="token punctuation" style="color:rgb(199, 146, 234)">(</span><span class="token number" style="color:rgb(247, 140, 108)">50</span><span class="token punctuation" style="color:rgb(199, 146, 234)">,</span><span class="token plain"> </span><span class="token number" style="color:rgb(247, 140, 108)">50</span><span class="token punctuation" style="color:rgb(199, 146, 234)">)</span><span class="token punctuation" style="color:rgb(199, 146, 234)">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#bfc7d5"><span class="token plain"></span><span class="token punctuation" style="color:rgb(199, 146, 234)">}</span><span class="token punctuation" style="color:rgb(199, 146, 234)">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="deviations-from-particleemitter">Deviations from <code>ParticleEmitter</code><a href="#deviations-from-particleemitter" class="hash-link" aria-label="Direct link to deviations-from-particleemitter" title="Direct link to deviations-from-particleemitter">​</a></h2>
+<ul>
+<li>This is a <strong>2D UI particle system</strong>. It does not support lighting properties (<code>LightEmission</code>, <code>LightInfluence</code>, <code>WindAffectsDrag</code>, etc).</li>
+<li><code>Acceleration</code> is a Vector2 since this is a 2D system.</li>
+<li><code>SpreadAngle</code> is a single number instead of a <code>Vector2</code> since this is a 2D system.</li>
+<li><code>Shape</code> uses equivalent 2D shapes.</li>
+<li><code>EmissionDirection</code>, <code>Shape</code>, <code>ShapeStyle</code> use custom 2D enums <code>ReactEmitter.NormalId2D</code> <code>ReactEmitter.ParticleEmitterShape2D</code> <code>ReactEmitter.ParticleEmitterShapeStyle2D</code></li>
+<li>Flipbooks require full image resolution (<code>FlipbookImageSize</code>), default <code>1024 × 1024</code> pixels.</li>
+<li><code>Texture</code> must be a <code>Content</code> type (<code>fromAssetId</code>, <code>fromUri</code>). Raw strings are not supported.</li>
+<li>Maximum <code>Rate</code> is still <strong>200 particles/sec</strong>. UI particles are significantly more expensive than normal particles, so you should use far less.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="properties">Properties<a href="#properties" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="acceleration-vector2"><code>Acceleration: Vector2</code><a href="#acceleration-vector2" class="hash-link" aria-label="Direct link to acceleration-vector2" title="Direct link to acceleration-vector2">​</a></h3>
+<p>Acceleration applied along the <strong>X and Y axes</strong>.<br>
+<!-- -->Default: <code>Vector2.zero</code><br>
+<!-- -->Deviation: Uses <code>Vector2</code> instead of <code>Vector3</code>.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="brightness-number"><code>Brightness: number</code><a href="#brightness-number" class="hash-link" aria-label="Direct link to brightness-number" title="Direct link to brightness-number">​</a></h3>
+<p>Visual intensity multiplier for UI particles.<br>
+<!-- -->Default: <code>1</code><br>
+<!-- -->Deviation: <code>ImageColor</code> is effectively clamped to RGB <code>255, 255, 255</code>. Values above 1 provide minimal benefit and are <strong>not recommended</strong>.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="color-colorsequence"><code>Color: ColorSequence</code><a href="#color-colorsequence" class="hash-link" aria-label="Direct link to color-colorsequence" title="Direct link to color-colorsequence">​</a></h3>
+<p>Colour gradient applied over the particle’s lifetime.<br>
+<!-- -->Default: <code>ColorSequence.new(Color3.new(1, 1, 1))</code> (solid white)<br>
+<!-- -->Matches <code>ParticleEmitter</code> except constrained to UI rendering limits.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="drag-number"><code>Drag: number</code><a href="#drag-number" class="hash-link" aria-label="Direct link to drag-number" title="Direct link to drag-number">​</a></h3>
+<p>Exponential velocity decay factor. Higher values reduce speed faster.<br>
+<!-- -->Default: <code>0</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="emissiondirection-normalid2d"><code>EmissionDirection: NormalId2D</code><a href="#emissiondirection-normalid2d" class="hash-link" aria-label="Direct link to emissiondirection-normalid2d" title="Direct link to emissiondirection-normalid2d">​</a></h3>
+<p>Emitter face direction when <code>Shape</code> is <code>Rectangle</code>.<br>
+<!-- -->Default: <code>NormalId2D.Top</code><br>
+<!-- -->Deviation: Uses a <strong>2D enum</strong> rather than <code>Enum.NormalId</code>.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="enabled-boolean"><code>Enabled: boolean</code><a href="#enabled-boolean" class="hash-link" aria-label="Direct link to enabled-boolean" title="Direct link to enabled-boolean">​</a></h3>
+<p>Whether the emitter automatically spawns particles at <code>Rate × TimeScale</code>.<br>
+<!-- -->Default: <code>true</code><br>
+<!-- -->Note: Even when disabled, you may spawn manually via the imperative API.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="flipbookframerate-numberrange"><code>FlipbookFramerate: NumberRange</code><a href="#flipbookframerate-numberrange" class="hash-link" aria-label="Direct link to flipbookframerate-numberrange" title="Direct link to flipbookframerate-numberrange">​</a></h3>
+<p>Animation speed range (frames/sec) for flipbook textures.<br>
+<!-- -->Default: <code>NumberRange.new(1)</code><br>
+<!-- -->Note: Applies only to <code>Loop</code> and <code>Random</code> flipbook modes.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="flipbookimagesize-vector2"><code>FlipbookImageSize: Vector2</code><a href="#flipbookimagesize-vector2" class="hash-link" aria-label="Direct link to flipbookimagesize-vector2" title="Direct link to flipbookimagesize-vector2">​</a></h3>
+<p>Full resolution of the source flipbook image in <strong>pixels</strong> (<code>width, height</code>).<br>
+<!-- -->Default: <code>Vector2.new(1024, 1024)</code><br>
+<!-- -->Deviation: Required for correct UV slicing. Particle Emitters infer this automatically; UI emitters cannot.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="flipbooklayout-particleflipbooklayout"><code>FlipbookLayout: ParticleFlipbookLayout</code><a href="#flipbooklayout-particleflipbooklayout" class="hash-link" aria-label="Direct link to flipbooklayout-particleflipbooklayout" title="Direct link to flipbooklayout-particleflipbooklayout">​</a></h3>
+<p>Cell layout mode for flipbooks.<br>
+<!-- -->Default: <code>ParticleFlipbookLayout.None</code><br>
+<!-- -->Deviation: No <code>FlipbookIncompatible</code> error string, test the flipbook on a Particle Emitter if needed.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="flipbookmode-particleflipbookmode"><code>FlipbookMode: ParticleFlipbookMode</code><a href="#flipbookmode-particleflipbookmode" class="hash-link" aria-label="Direct link to flipbookmode-particleflipbookmode" title="Direct link to flipbookmode-particleflipbookmode">​</a></h3>
+<p>Animation mode for flipbook playback.<br>
+<!-- -->Default: <code>ParticleFlipbookMode.Loop</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="flipbooksizex-number"><code>FlipbookSizeX: number</code><a href="#flipbooksizex-number" class="hash-link" aria-label="Direct link to flipbooksizex-number" title="Direct link to flipbooksizex-number">​</a></h3>
+<p>Number of columns when using <code>FlipbookMode.Custom</code>.<br>
+<!-- -->Default: <code>1</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="flipbooksizey-number"><code>FlipbookSizeY: number</code><a href="#flipbooksizey-number" class="hash-link" aria-label="Direct link to flipbooksizey-number" title="Direct link to flipbooksizey-number">​</a></h3>
+<p>Number of rows when using <code>FlipbookMode.Custom</code>.<br>
+<!-- -->Default: <code>1</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="flipbookstartrandom-boolean"><code>FlipbookStartRandom: boolean</code><a href="#flipbookstartrandom-boolean" class="hash-link" aria-label="Direct link to flipbookstartrandom-boolean" title="Direct link to flipbookstartrandom-boolean">​</a></h3>
+<p>If <code>true</code>, each particle begins on a random frame.<br>
+<!-- -->Default: <code>false</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="lifetime-numberrange"><code>Lifetime: NumberRange</code><a href="#lifetime-numberrange" class="hash-link" aria-label="Direct link to lifetime-numberrange" title="Direct link to lifetime-numberrange">​</a></h3>
+<p>Random lifespan range for new particles in <strong>seconds</strong>.<br>
+<!-- -->Default: <code>NumberRange.new(5, 10)</code><br>
+<!-- -->Matches <code>ParticleEmitter</code> conceptually.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="rate-number"><code>Rate: number</code><a href="#rate-number" class="hash-link" aria-label="Direct link to rate-number" title="Direct link to rate-number">​</a></h3>
+<p>Particles emitted per second at <code>TimeScale = 1</code>.<br>
+<!-- -->Default: <code>20</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="rotation-numberrange"><code>Rotation: NumberRange</code><a href="#rotation-numberrange" class="hash-link" aria-label="Direct link to rotation-numberrange" title="Direct link to rotation-numberrange">​</a></h3>
+<p>Initial rotation range in <strong>degrees</strong>.<br>
+<!-- -->Default: <code>NumberRange.new(0)</code><br>
+<!-- -->Matches <code>ParticleEmitter</code>.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="rotspeed-numberrange"><code>RotSpeed: NumberRange</code><a href="#rotspeed-numberrange" class="hash-link" aria-label="Direct link to rotspeed-numberrange" title="Direct link to rotspeed-numberrange">​</a></h3>
+<p>Angular velocity range in <strong>degrees/sec</strong>.<br>
+<!-- -->Default: <code>NumberRange.new(0)</code><br>
+<!-- -->Matches <code>ParticleEmitter</code>.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="shape-particleemittershape2d"><code>Shape: ParticleEmitterShape2D</code><a href="#shape-particleemittershape2d" class="hash-link" aria-label="Direct link to shape-particleemittershape2d" title="Direct link to shape-particleemittershape2d">​</a></h3>
+<p>Emitter shape type. Options: <code>Rectangle</code> or <code>Annulus</code>.<br>
+<!-- -->Default: <code>ParticleEmitterShape2D.Rectangle</code><br>
+<!-- -->Deviation: Uses 2D shape equivalents to normal Particle Emitters. Currently no proper replacement for <code>Sphere</code>, so semicircles are not supported right now.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="shapedimensions-vector2"><code>ShapeDimensions: Vector2</code><a href="#shapedimensions-vector2" class="hash-link" aria-label="Direct link to shapedimensions-vector2" title="Direct link to shapedimensions-vector2">​</a></h3>
+<p>Emitter size in <strong>pixels</strong> when spawning in UI space (<code>width, height</code>).<br>
+<!-- -->Default: <code>Vector2.new(1, 1)</code><br>
+<!-- -->Deviation: Must be explicitly supplied for shape spawning since Emitters are detached from Particle Renderers.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="shapeinout-enumparticleemittershapeinout"><code>ShapeInOut: Enum.ParticleEmitterShapeInOut</code><a href="#shapeinout-enumparticleemittershapeinout" class="hash-link" aria-label="Direct link to shapeinout-enumparticleemittershapeinout" title="Direct link to shapeinout-enumparticleemittershapeinout">​</a></h3>
+<p>Controls emission direction: <code>Outward</code>, <code>Inward</code>, or <code>InAndOut</code>.<br>
+<!-- -->Default: <code>Outward</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="shapepartial-number"><code>ShapePartial: number</code><a href="#shapepartial-number" class="hash-link" aria-label="Direct link to shapepartial-number" title="Direct link to shapepartial-number">​</a></h3>
+<p>For <code>Annulus</code> only. Inner radius multiplier <code>[0, 1]</code> relative to outer radius.<br>
+<code>1</code> = full disc, <code>0</code> = perimeter only.<br>
+<!-- -->Default: <code>1</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="shapestyle-particleemittershapestyle2d"><code>ShapeStyle: ParticleEmitterShapeStyle2D</code><a href="#shapestyle-particleemittershapestyle2d" class="hash-link" aria-label="Direct link to shapestyle-particleemittershapestyle2d" title="Direct link to shapestyle-particleemittershapestyle2d">​</a></h3>
+<p>Spawn mode. Options: <code>Area</code> or <code>Perimeter</code>.<br>
+<!-- -->Default: <code>ParticleEmitterShapeStyle2D.Area</code><br>
+<!-- -->Deviation: These are the 2D equivalents to Volume and Surface.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="size-numbersequence"><code>Size: NumberSequence</code><a href="#size-numbersequence" class="hash-link" aria-label="Direct link to size-numbersequence" title="Direct link to size-numbersequence">​</a></h3>
+<p>Relative size curve over the particle lifetime.<br>
+<!-- -->Default: <code>NumberSequence.new(1)</code><br>
+<!-- -->Matches <code>ParticleEmitter</code>, but interpreted relative to the larger <code>ParticleRenderer</code> dimension.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="speed-numberrange"><code>Speed: NumberRange</code><a href="#speed-numberrange" class="hash-link" aria-label="Direct link to speed-numberrange" title="Direct link to speed-numberrange">​</a></h3>
+<p>Initial velocity range<br>
+<!-- -->Default: <code>NumberRange.new(5)</code><br>
+<!-- -->Note: May be negative to emit in reverse direction.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="spreadangle-number"><code>SpreadAngle: number</code><a href="#spreadangle-number" class="hash-link" aria-label="Direct link to spreadangle-number" title="Direct link to spreadangle-number">​</a></h3>
+<p>Random directional offset in <strong>degrees</strong> either side of <code>EmissionDirection</code>.<br>
+<!-- -->Default: <code>0</code><br>
+<!-- -->Deviation: Single scalar instead of a 2D vector.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="squash-numbersequence"><code>Squash: NumberSequence</code><a href="#squash-numbersequence" class="hash-link" aria-label="Direct link to squash-numbersequence" title="Direct link to squash-numbersequence">​</a></h3>
+<p>Non-uniform scale curve over lifetime.<br>
+<code>&gt;0</code> = taller vertically, <code>&lt;0</code> = wider horizontally.<br>
+<!-- -->Default: <code>NumberSequence.new(0)</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="texture-content"><code>Texture: Content</code><a href="#texture-content" class="hash-link" aria-label="Direct link to texture-content" title="Direct link to texture-content">​</a></h3>
+<p>Particle sprite texture source. Must be a <code>Content</code> type.<br>
+<!-- -->Default: <code>Content.fromUri(&quot;rbxasset://textures/particles/sparkles_main.dds&quot;)</code><br>
+<!-- -->Deviation: Raw strings are <strong>not supported</strong>.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="timescale-number"><code>TimeScale: number</code><a href="#timescale-number" class="hash-link" aria-label="Direct link to timescale-number" title="Direct link to timescale-number">​</a></h3>
+<p>Simulation speed multiplier. Also scales <code>Rate</code>.<br>
+<!-- -->Default: <code>1</code><br>
+<!-- -->Deviation: Supports values <strong>outside</strong> <code>[0, 1]</code> unlike <code>ParticleEmitter</code>.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="transparency-numbersequence"><code>Transparency: NumberSequence</code><a href="#transparency-numbersequence" class="hash-link" aria-label="Direct link to transparency-numbersequence" title="Direct link to transparency-numbersequence">​</a></h3>
+<p>Opacity curve over lifetime.<br>
+<!-- -->Default: <code>NumberSequence.new(0)</code> (fully visible)</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="notes">Notes<a href="#notes" class="hash-link" aria-label="Direct link to Notes" title="Direct link to Notes">​</a></h2>
+<ul>
+<li>The size of particles is relative to the size of the <code>ParticleRenderer</code>.</li>
+<li>Particles are always <strong>locked to the <code>ParticleRenderer</code> UI component</strong> (<code>LockedToPart</code> behaviour).</li>
+<li><code>ZOffset</code> and <code>LocalTransparencyModifier</code> are handled by <code>ParticleRenderer</code> instead of Emitters.</li>
+<li>You can also change the <code>ResampleMode</code> on the <code>ParticleRenderer</code>.</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/isoopod/React-Emitter/edit/main/docs/emitters.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/React-Emitter/docs/intro"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Intro</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/React-Emitter/docs/renderer"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Particle Renderer</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#usage" class="table-of-contents__link toc-highlight">Usage</a></li><li><a href="#deviations-from-particleemitter" class="table-of-contents__link toc-highlight">Deviations from <code>ParticleEmitter</code></a></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#acceleration-vector2" class="table-of-contents__link toc-highlight"><code>Acceleration: Vector2</code></a></li><li><a href="#brightness-number" class="table-of-contents__link toc-highlight"><code>Brightness: number</code></a></li><li><a href="#color-colorsequence" class="table-of-contents__link toc-highlight"><code>Color: ColorSequence</code></a></li><li><a href="#drag-number" class="table-of-contents__link toc-highlight"><code>Drag: number</code></a></li><li><a href="#emissiondirection-normalid2d" class="table-of-contents__link toc-highlight"><code>EmissionDirection: NormalId2D</code></a></li><li><a href="#enabled-boolean" class="table-of-contents__link toc-highlight"><code>Enabled: boolean</code></a></li><li><a href="#flipbookframerate-numberrange" class="table-of-contents__link toc-highlight"><code>FlipbookFramerate: NumberRange</code></a></li><li><a href="#flipbookimagesize-vector2" class="table-of-contents__link toc-highlight"><code>FlipbookImageSize: Vector2</code></a></li><li><a href="#flipbooklayout-particleflipbooklayout" class="table-of-contents__link toc-highlight"><code>FlipbookLayout: ParticleFlipbookLayout</code></a></li><li><a href="#flipbookmode-particleflipbookmode" class="table-of-contents__link toc-highlight"><code>FlipbookMode: ParticleFlipbookMode</code></a></li><li><a href="#flipbooksizex-number" class="table-of-contents__link toc-highlight"><code>FlipbookSizeX: number</code></a></li><li><a href="#flipbooksizey-number" class="table-of-contents__link toc-highlight"><code>FlipbookSizeY: number</code></a></li><li><a href="#flipbookstartrandom-boolean" class="table-of-contents__link toc-highlight"><code>FlipbookStartRandom: boolean</code></a></li><li><a href="#lifetime-numberrange" class="table-of-contents__link toc-highlight"><code>Lifetime: NumberRange</code></a></li><li><a href="#rate-number" class="table-of-contents__link toc-highlight"><code>Rate: number</code></a></li><li><a href="#rotation-numberrange" class="table-of-contents__link toc-highlight"><code>Rotation: NumberRange</code></a></li><li><a href="#rotspeed-numberrange" class="table-of-contents__link toc-highlight"><code>RotSpeed: NumberRange</code></a></li><li><a href="#shape-particleemittershape2d" class="table-of-contents__link toc-highlight"><code>Shape: ParticleEmitterShape2D</code></a></li><li><a href="#shapedimensions-vector2" class="table-of-contents__link toc-highlight"><code>ShapeDimensions: Vector2</code></a></li><li><a href="#shapeinout-enumparticleemittershapeinout" class="table-of-contents__link toc-highlight"><code>ShapeInOut: Enum.ParticleEmitterShapeInOut</code></a></li><li><a href="#shapepartial-number" class="table-of-contents__link toc-highlight"><code>ShapePartial: number</code></a></li><li><a href="#shapestyle-particleemittershapestyle2d" class="table-of-contents__link toc-highlight"><code>ShapeStyle: ParticleEmitterShapeStyle2D</code></a></li><li><a href="#size-numbersequence" class="table-of-contents__link toc-highlight"><code>Size: NumberSequence</code></a></li><li><a href="#speed-numberrange" class="table-of-contents__link toc-highlight"><code>Speed: NumberRange</code></a></li><li><a href="#spreadangle-number" class="table-of-contents__link toc-highlight"><code>SpreadAngle: number</code></a></li><li><a href="#squash-numbersequence" class="table-of-contents__link toc-highlight"><code>Squash: NumberSequence</code></a></li><li><a href="#texture-content" class="table-of-contents__link toc-highlight"><code>Texture: Content</code></a></li><li><a href="#timescale-number" class="table-of-contents__link toc-highlight"><code>TimeScale: number</code></a></li><li><a href="#transparency-numbersequence" class="table-of-contents__link toc-highlight"><code>Transparency: NumberSequence</code></a></li></ul></li><li><a href="#notes" class="table-of-contents__link toc-highlight">Notes</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 isoopod. Built with Moonwave and Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
