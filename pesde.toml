@@ -1,5 +1,5 @@
 name = "isoopod/react_emitter"
-version = "1.0.0"
+version = "1.0.1"
 description = "2D Particle Emitter for React-lua"
 authors = ["isoopod"]
 repository = "https://github.com/isoopod/React-Emitter"
